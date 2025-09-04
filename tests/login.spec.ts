@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 test.describe('My Playwright Tests', () => {
-  test("Verify that login page is successfully loaded", async ({page}) => {
-            await page.goto("https://test.busnetwork.net/");
+  test("Verify that login page is successfully loaded", async ({page,baseURL}) => {
+            await page.goto('/auth/signin');
             await expect(page.getByRole('button', {name: 'flag'})).toBeVisible();
             await expect(page.getByRole('button', {name: 'Help '})).toBeVisible();
             await expect(page.locator('div').filter({hasText: /^BusNetwork$/})).toBeVisible();
@@ -16,7 +16,7 @@ test.describe('My Playwright Tests', () => {
     );
 
     test("Verify that user is able to insert user name and password", async ({page })=>{
-        await page.goto('https://test.busnetwork.net/auth/signin');
+        await page.goto('/auth/signin');
         await expect(page.getByRole('textbox', { name: 'Enter your email address' })).toBeVisible();
         await page.getByRole('textbox', { name: 'Enter your email address' }).click();
         await page.getByRole('textbox', { name: 'Enter your email address' }).fill('share_food@yopmail.com');
